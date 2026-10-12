@@ -1,0 +1,8 @@
+name: MCLobby
+version: '${version}'
+
+main: de.alextom.mcLobby.MCLobby
+api-version: '26.3'
+load: STARTUP
+
+authors: [Alex Tom]
