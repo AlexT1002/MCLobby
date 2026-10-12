@@ -67,6 +67,7 @@ public final class MCLobby extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerDropItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
         this.getServer().getPluginManager().registerEvents(new WeatherChangeListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(), this);
     }
 
     public static MCLobby getInstance() {
