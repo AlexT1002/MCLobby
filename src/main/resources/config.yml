@@ -1,0 +1,24 @@
+Spawnlocation:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  yaw: 0.0
+  pitch: 0.0
+  World: world
+
+Items:
+  Navigator:
+    Enable: true
+    Name: "§6§lNavigator"
+    Material: NETHER_STAR
+    PlaceInHotbar: 0 #Hotbar starts with 0-8
+  Utils:
+    Enable: true
+    Name: "§6§lUtils"
+    Material: BLAZE_ROD
+    PlaceInHotbar: 1 #Hotbar starts with 0-8
+  Settings:
+    Enable: true
+    Name: "§6§lSettings"
+    Material: COMPARATOR
+    PlaceInHotbar: 8 #Hotbar starts with 0-8
