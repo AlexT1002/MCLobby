@@ -1,6 +1,7 @@
-package de.alextom.mcLobby.listener;
+package de.alextom.mcLobby.listener.playerListener;
 
 import de.alextom.mcLobby.MCLobby;
+import de.alextom.mcLobby.items.JoinItems;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -26,9 +27,10 @@ public class PlayerJoinListener implements Listener {
         );
 
         player.teleport(location);
+        JoinItems.giveJoinItems(player);
 
         if(MCLobby.getMessageConfig().getString("JoinMessage") != null){
-            String joinMessage = MCLobby.getMessageConfig().getString("JoinMessage").replace("%player%", event.getPlayer().getName());
+            String joinMessage = Objects.requireNonNull(MCLobby.getMessageConfig().getString("JoinMessage")).replace("%player%", event.getPlayer().getName());
             Component component = LegacyComponentSerializer.legacySection().deserialize(joinMessage);
             event.joinMessage(component);
         }else{

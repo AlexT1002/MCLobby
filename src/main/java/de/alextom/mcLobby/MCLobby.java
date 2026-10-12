@@ -2,8 +2,12 @@ package de.alextom.mcLobby;
 
 import de.alextom.mcLobby.commands.SetSpawnCommand;
 import de.alextom.mcLobby.commands.SpawnCommand;
-import de.alextom.mcLobby.listener.PlayerJoinListener;
-import de.alextom.mcLobby.listener.PlayerQuitListener;
+import de.alextom.mcLobby.listener.blockListener.BlockBreakListener;
+import de.alextom.mcLobby.listener.blockListener.BlockPlaceListener;
+import de.alextom.mcLobby.listener.inventoryListener.InventoryClickListener;
+import de.alextom.mcLobby.listener.inventoryListener.InventoryMoveItemListener;
+import de.alextom.mcLobby.listener.playerListener.*;
+import de.alextom.mcLobby.listener.weatherListener.WeatherChangeListener;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,7 +23,6 @@ public final class MCLobby extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-
         this.saveResource("config.yml", false);
 
         File messageFile = new File(instance.getDataFolder(), "messages.yml");
@@ -30,18 +33,36 @@ public final class MCLobby extends JavaPlugin {
 
         prefix = messageConfig.getString("prefix");
 
-        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            event.registrar().register(SetSpawnCommand.newCommand("setspawn"), "Set the Spawn");
-            event.registrar().register(SpawnCommand.newCommand("spawn"), "teleport to spawn");
-        });
 
-        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
+        registerCommands();
+        registerEvents();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    private void registerCommands(){
+        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            event.registrar().register(SetSpawnCommand.newCommand("setspawn"), "Set the Spawn");
+            event.registrar().register(SpawnCommand.newCommand("spawn"), "teleport to spawn");
+        });
+    }
+
+    private void registerEvents(){
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryMoveItemListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerDamageListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerDropItemListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(), this);
+        this.getServer().getPluginManager().registerEvents(new WeatherChangeListener(), this);
     }
 
     public static MCLobby getInstance() {
