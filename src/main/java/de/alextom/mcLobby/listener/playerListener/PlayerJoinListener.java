@@ -2,6 +2,7 @@ package de.alextom.mcLobby.listener.playerListener;
 
 import de.alextom.mcLobby.MCLobby;
 import de.alextom.mcLobby.items.JoinItems;
+import de.alextom.mcLobby.utils.BuildSystem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public class PlayerJoinListener implements Listener {
 
         player.teleport(location);
         JoinItems.giveJoinItems(player);
+        BuildSystem.setPlayerBuildMode(player, false);
 
         if(MCLobby.getMessageConfig().getString("JoinMessage") != null){
             String joinMessage = Objects.requireNonNull(MCLobby.getMessageConfig().getString("JoinMessage")).replace("%player%", event.getPlayer().getName());

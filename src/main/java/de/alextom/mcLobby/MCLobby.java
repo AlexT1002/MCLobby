@@ -1,5 +1,7 @@
 package de.alextom.mcLobby;
 
+import de.alextom.mcLobby.World.WorldSettings;
+import de.alextom.mcLobby.commands.BuildCommand;
 import de.alextom.mcLobby.commands.SetSpawnCommand;
 import de.alextom.mcLobby.commands.SpawnCommand;
 import de.alextom.mcLobby.listener.blockListener.BlockBreakListener;
@@ -36,6 +38,8 @@ public final class MCLobby extends JavaPlugin {
 
         registerCommands();
         registerEvents();
+
+        WorldSettings.mainWorldSettings();
     }
 
     @Override
@@ -47,6 +51,7 @@ public final class MCLobby extends JavaPlugin {
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             event.registrar().register(SetSpawnCommand.newCommand("setspawn"), "Set the Spawn");
             event.registrar().register(SpawnCommand.newCommand("spawn"), "teleport to spawn");
+            event.registrar().register(BuildCommand.newCommand("build"), "Switch Buildmode");
         });
     }
 
@@ -61,7 +66,6 @@ public final class MCLobby extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDropItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new WeatherChangeListener(), this);
     }
 

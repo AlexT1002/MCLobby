@@ -1,5 +1,6 @@
 package de.alextom.mcLobby.listener.playerListener;
 
+import de.alextom.mcLobby.utils.BuildSystem;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -7,6 +8,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 public class PlayerDropItemListener implements Listener {
     @EventHandler
     public void playerDropItem(PlayerDropItemEvent event){
-        event.setCancelled(true);
+        event.setCancelled(!BuildSystem.isPlayerInBuildmode(event.getPlayer()));
     }
 }

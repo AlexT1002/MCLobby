@@ -6,3 +6,5 @@ QuitMessage: "§7[§c-§7] §6%player%"
 # Command Message
 SpawnMessage: "§7Teleported to Spawn"
 SetSpawnMessage: "§7New Spawn set."
+BuildEnableMessage: "§7Buildmode §aEnabled"
+BuildDisableMessage: "§7Buildmode §cDisabled"
