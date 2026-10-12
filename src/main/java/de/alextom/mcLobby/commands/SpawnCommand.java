@@ -5,6 +5,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import de.alextom.mcLobby.MCLobby;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -30,7 +32,9 @@ public class SpawnCommand {
                            (float) MCLobby.getInstance().getConfig().getDouble("Spawnlocation.pitch")
                    );
                    player.teleport(location);
-                   commandSender.sendPlainMessage("Du wurdest zum Spawn teleportiert!");
+
+                   Component component = LegacyComponentSerializer.legacySection().deserialize(MCLobby.getPrefix() + Objects.requireNonNull(MCLobby.getMessageConfig().getString("SpawnMessage")));
+                   commandSender.sendMessage(component);
 
                    return Command.SINGLE_SUCCESS;
                 }).build();

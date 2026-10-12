@@ -5,9 +5,13 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import de.alextom.mcLobby.MCLobby;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Objects;
 
 public class SetSpawnCommand {
     public static LiteralCommandNode<CommandSourceStack> newCommand(final String commandName){
@@ -29,7 +33,9 @@ public class SetSpawnCommand {
 
                     MCLobby.getInstance().saveConfig();
 
-                    commandSender.sendPlainMessage("Spawn wurde gesetzt!");
+                    Component component = LegacyComponentSerializer.legacySection().deserialize(MCLobby.getPrefix() + Objects.requireNonNull(MCLobby.getMessageConfig().getString("SetSpawnMessage")));
+                    commandSender.sendMessage(component);
+
                     return Command.SINGLE_SUCCESS;
                 }).build();
     }

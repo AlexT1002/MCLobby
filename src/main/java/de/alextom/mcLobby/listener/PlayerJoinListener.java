@@ -1,6 +1,8 @@
 package de.alextom.mcLobby.listener;
 
 import de.alextom.mcLobby.MCLobby;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -24,5 +26,13 @@ public class PlayerJoinListener implements Listener {
         );
 
         player.teleport(location);
+
+        if(MCLobby.getMessageConfig().getString("JoinMessage") != null){
+            String joinMessage = MCLobby.getMessageConfig().getString("JoinMessage").replace("%player%", event.getPlayer().getName());
+            Component component = LegacyComponentSerializer.legacySection().deserialize(joinMessage);
+            event.joinMessage(component);
+        }else{
+            event.joinMessage(null);
+        }
     }
 }

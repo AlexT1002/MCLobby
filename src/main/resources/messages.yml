@@ -1,0 +1,8 @@
+prefix: "§7[§6MCLobby§7] "
+
+JoinMessage: "§7[§a+§7] §6%player%"
+QuitMessage: "§7[§c-§7] §6%player%"
+
+# Command Message
+SpawnMessage: "§7Teleported to Spawn"
+SetSpawnMessage: "§7New Spawn set."
