@@ -6,6 +6,7 @@ import de.alextom.mcLobby.utils.BuildSystem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,7 @@ public class PlayerJoinListener implements Listener {
                 (float) MCLobby.getInstance().getConfig().getDouble("Spawnlocation.pitch")
         );
 
+        player.setGameMode(Objects.requireNonNull(getGameMode()));
         player.teleport(location);
         JoinItems.giveJoinItems(player);
         BuildSystem.setPlayerBuildMode(player, false);
@@ -38,5 +40,15 @@ public class PlayerJoinListener implements Listener {
         }else{
             event.joinMessage(null);
         }
+    }
+
+    private GameMode getGameMode(){
+        return switch (MCLobby.getInstance().getConfig().getInt("GameMode")) {
+            case 0 -> GameMode.SURVIVAL;
+            case 1 -> GameMode.CREATIVE;
+            case 2 -> GameMode.ADVENTURE;
+            case 3 -> GameMode.SPECTATOR;
+            default -> null;
+        };
     }
 }

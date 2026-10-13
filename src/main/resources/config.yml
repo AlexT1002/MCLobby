@@ -1,3 +1,5 @@
+GameMode: 0 # 0 = SURVIVAL, 1 = CREATIVE, 2 = ADVENTURE, 3 = SPECTATOR
+
 Spawnlocation:
   x: 0.0
   y: 0.0
@@ -22,3 +24,37 @@ Items:
     Name: "§6§lSettings"
     Material: COMPARATOR
     PlaceInHotbar: 8 #Hotbar starts with 0-8
+
+Inventory:
+  Navigator:
+    Title: "§6§lNavigator"
+    Size: 27
+    Slots:
+      0: #starts with 0
+        Name: "§6§lSpawn"
+        Lore: "Teleport to<line>§c§lSpawn" #new line with "<line>"
+        Material: STONE
+        Command: "/spawn"
+      1: #starts with 0
+        Name: "§6§lSet Spawn"
+        Lore: "Set new §6Spawn" #new line with "<line>"
+        Material: STONE
+        Command: "/setspawn"
+  Utils:
+    Title: "§6§lUtils"
+    Size: 9
+    Slots:
+      0: #starts with 0
+        Name: "§6§lTEST"
+        Lore: "" #new line with "<line>"
+        Material: STONE
+        Command: "/warp ..."
+  Settings:
+    Title: "§6§lSettings"
+    Size: 9
+    Slots:
+      0: #starts with 0
+        Name: "§6§lTEST"
+        Lore: "" #new line with "<line>"
+        Material: STONE
+        Command: "/warp ..."

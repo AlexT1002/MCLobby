@@ -4,6 +4,9 @@ import de.alextom.mcLobby.World.WorldSettings;
 import de.alextom.mcLobby.commands.BuildCommand;
 import de.alextom.mcLobby.commands.SetSpawnCommand;
 import de.alextom.mcLobby.commands.SpawnCommand;
+import de.alextom.mcLobby.inventorys.NavigatorInventory;
+import de.alextom.mcLobby.inventorys.SettingsInventory;
+import de.alextom.mcLobby.inventorys.UtilsInventory;
 import de.alextom.mcLobby.listener.blockListener.BlockBreakListener;
 import de.alextom.mcLobby.listener.blockListener.BlockPlaceListener;
 import de.alextom.mcLobby.listener.inventoryListener.InventoryClickListener;
@@ -20,6 +23,10 @@ public final class MCLobby extends JavaPlugin {
     private static MCLobby instance;
     private static YamlConfiguration messageConfig;
     private static String prefix;
+
+    private static NavigatorInventory navigatorInventory;
+    private static SettingsInventory settingsInventory;
+    private static UtilsInventory utilsInventory;
 
     @Override
     public void onEnable() {
@@ -40,6 +47,10 @@ public final class MCLobby extends JavaPlugin {
         registerEvents();
 
         WorldSettings.mainWorldSettings();
+
+        navigatorInventory = new NavigatorInventory(instance);
+        settingsInventory = new SettingsInventory(instance);
+        utilsInventory = new UtilsInventory(instance);
     }
 
     @Override
@@ -78,5 +89,14 @@ public final class MCLobby extends JavaPlugin {
     }
     public static String getPrefix() {
         return prefix;
+    }
+    public static NavigatorInventory getNavigatorInventory() {
+        return navigatorInventory;
+    }
+    public static SettingsInventory getSettingsInventory() {
+        return settingsInventory;
+    }
+    public static UtilsInventory getUtilsInventory() {
+        return utilsInventory;
     }
 }
